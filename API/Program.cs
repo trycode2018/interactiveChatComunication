@@ -45,7 +45,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
 app.MapAccountEndpoint();
+app.UseStaticFiles();
+
 app.Run();
 
