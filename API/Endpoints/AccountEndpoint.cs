@@ -79,7 +79,7 @@ public static class AccountEndpoint
                 return Results.BadRequest(Response<string>.Failure("Invalid password"));
             }
 
-            var token = tokenService.GenerateToken(user.Id, user.UserName);
+            var token = tokenService.GenerateToken(user.Id, user.UserName!);
 
             return Results.Ok(Response<string>.Success(token, "Login successfully"));
         });
