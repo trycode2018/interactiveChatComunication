@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using API.Endpoints;
+using API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var JwtSetting = builder.Configuration.GetSection("JWTSetting");
@@ -13,6 +14,10 @@ builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlite("Data Source=chat.d
 builder.Services.AddIdentityCore<AppUser>()
 .AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.AddScoped<TokenService>();
+
+
+// Autentication JWT
 builder.Services.AddAuthentication(opt =>
 {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
