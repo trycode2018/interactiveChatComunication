@@ -3,8 +3,10 @@ using API.Common;
 using API.DTOs;
 using API.Models;
 using API.Services;
+using API.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Endpoints;
 
@@ -57,6 +59,16 @@ public static class AccountEndpoint
             return Results.Ok(Response<string>.Success("", "User created successfull"));
         }).DisableAntiforgery();
 
+        group.MapGet("/me", async (HttpContext context, UserManager<AppUser> userManaer) =>
+        {
+            var currentLoggedInUserId = context.User.GetUserId()!;
+            var currentLoggedInUser = await userManaer.Users.SingleOrDefaultAsync(x => x.Id == currentLoggedInUserId.ToString());
+
+
+            return Results
+            .Ok(Response<AppUser>
+            .Success(currentLoggedInUser!, "User fetched successfully"));
+        }).RequireAuthorization();
 
         group.MapPost("/login", async (UserManager<AppUser> userManager,
         TokenService tokenService, LoginDto dto) =>

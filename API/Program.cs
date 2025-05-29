@@ -89,8 +89,13 @@ app.UseCors(x => x.AllowAnyHeader()
 
 app.UseHttpsRedirection();
 
-app.MapAccountEndpoint();
+// Autenticacao e autorizacao 
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.MapHub<ChatHub>("hubs/chat");
+app.MapAccountEndpoint();
+
 app.Run();
 

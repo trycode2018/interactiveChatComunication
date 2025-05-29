@@ -76,7 +76,7 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
         {
             Id = x.Id,
             Content = x.Content,
-            CreatedDate = x.CreatedDate,
+            CreatedAt = x.CreatedDate,
             ReceiverId = x.ReceiverId,
             SenderId = x.SenderId
         })
