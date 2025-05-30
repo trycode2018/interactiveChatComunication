@@ -94,7 +94,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
-app.MapHub<ChatHub>("hubs/chat");
+app.MapHub<ChatHub>("/hubs/chat");
 app.MapAccountEndpoint();
 
 app.Run();
