@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YMSa37zmqip1ioYQJk65FVkaunKbiJYVm94HhsA02zs=",
+  "Hash": "mePZnYvqrcq3k/JNBb3drQ/TIs7UvL8b/o7SK8v2f1Q=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "API\\wwwroot",
       "Source": "API",
-      "ContentRoot": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\henri\\Desktop\\InteractiveChat\\Api\\wwwroot\\",
       "BasePath": "_content/API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
+      "Identity": "C:\\Users\\henri\\Desktop\\InteractiveChat\\Api\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\henri\\Desktop\\InteractiveChat\\Api\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "uploads/58100e94-f025-41fe-8809-67c2c4c3bd55#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -41,7 +41,7 @@
   "Endpoints": [
     {
       "Route": "uploads/58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
-      "AssetFile": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
+      "AssetFile": "C:\\Users\\henri\\Desktop\\InteractiveChat\\Api\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -78,7 +78,7 @@
     },
     {
       "Route": "uploads/58100e94-f025-41fe-8809-67c2c4c3bd55.olcxskles8.jpg",
-      "AssetFile": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
+      "AssetFile": "C:\\Users\\henri\\Desktop\\InteractiveChat\\Api\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
