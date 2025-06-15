@@ -45,7 +45,8 @@ public static class AccountEndpoint
                 Email = email,
                 FullName = fullName,
                 UserName = userName,
-                ProfileImage = picture
+                ProfilePicture = picture
+                //ProfileImage = picture
             };
 
 

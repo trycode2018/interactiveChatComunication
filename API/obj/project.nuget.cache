@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2SVb2AZEhPU=",
+  "dgSpecHash": "uWCiQNh5XoM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\Api\\API.csproj",
+  "projectFilePath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\henri\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\henri\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",

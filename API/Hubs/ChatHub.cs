@@ -36,7 +36,7 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
             {
                 ConnectionId = connectionId,
                 UserName = userName,
-                ProfilePicture = currentUser!.ProfileImage,
+                ProfilePicture = currentUser!.ProfilePicture,
                 FullName = currentUser!.FullName
             };
 
@@ -52,7 +52,7 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
             await LoadMessages(receiverId);
         }
 
-        await Clients.All.SendAsync("Online Users", await GetAllUsers());
+        await Clients.All.SendAsync("OnlineUsers", await GetAllUsers());
     }
 
     public async Task LoadMessages(string recipientId, int pageNumber = 1)
@@ -152,7 +152,7 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
             Id = u.Id,
             UserName = u.UserName,
             FullName = u.FullName,
-            ProfilePicture = u.ProfileImage,
+            ProfilePicture = u.ProfilePicture,
             IsOnline = onlineUserSet.Contains(u.UserName!),
             UnreadCount = context.Messages.Count(x => x.ReceiverId == username &&
             x.SenderId == u.Id && !x.IsRead)
