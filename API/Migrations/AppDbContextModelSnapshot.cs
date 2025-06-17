@@ -62,7 +62,7 @@ namespace API.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProfileImage")
+                    b.Property<string>("ProfilePicture")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")

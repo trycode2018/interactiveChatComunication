@@ -14,42 +14,64 @@ namespace API.Hubs;
 [Authorize]
 public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : Hub
 {
-    public static readonly ConcurrentDictionary<string, OnlineUserDto>
-    onlineUsers = new();
-
+    // Suporta múltiplas conexões por usuário
+    public static readonly ConcurrentDictionary<string, List<OnlineUserDto>> onlineUsers = new();
 
     public override async Task OnConnectedAsync()
     {
-        var httpContext = Context.GetHttpContext();
-        var receiverId = httpContext?.Request.Query["senderId"].ToString();
         var userName = Context.User!.Identity!.Name!;
-        var currentUser = await userManager.FindByNameAsync(userName);
         var connectionId = Context.ConnectionId;
+        var currentUser = await userManager.FindByNameAsync(userName);
 
-        if (onlineUsers.ContainsKey(userName))
+        var userDto = new OnlineUserDto
         {
-            onlineUsers[userName].ConnectionId = connectionId;
-        }
-        else
+            
+            ConnectionId = connectionId,
+            UserName = userName,
+            ProfilePicture = currentUser!.ProfilePicture,
+            FullName = currentUser.FullName
+        };
+
+        lock (onlineUsers)
         {
-            var user = new OnlineUserDto
+            if (onlineUsers.TryGetValue(userName, out var connections))
             {
-                ConnectionId = connectionId,
-                UserName = userName,
-                ProfilePicture = currentUser!.ProfilePicture,
-                FullName = currentUser!.FullName
-            };
-
-            onlineUsers.TryAdd(userName, user);
-
-            await Clients.AllExcept(connectionId).SendAsync("Notify",
-            currentUser);
-
+                connections.Add(userDto);
+            }
+            else
+            {
+                onlineUsers.TryAdd(userName, new List<OnlineUserDto> { userDto });
+            }
         }
 
-        if (!string.IsNullOrEmpty(receiverId))
+        await Clients.AllExcept(connectionId).SendAsync("Notify", currentUser);
+        await Clients.All.SendAsync("OnlineUsers", await GetAllUsers());
+
+        //var httpContext = Context.GetHttpContext();
+        //var receiverId = httpContext?.Request.Query["senderId"].ToString();
+
+        /*if (!string.IsNullOrEmpty(receiverId))
         {
             await LoadMessages(receiverId);
+        }*/
+    }
+
+    public override async Task OnDisconnectedAsync(Exception? exception)
+    {
+        var userName = Context.User!.Identity!.Name!;
+        var connectionId = Context.ConnectionId;
+
+        lock (onlineUsers)
+        {
+            if (onlineUsers.TryGetValue(userName, out var connections))
+            {
+                var connectionToRemove = connections.FirstOrDefault(c => c.ConnectionId == connectionId);
+                if (connectionToRemove != null)
+                    connections.Remove(connectionToRemove);
+
+                if (connections.Count == 0)
+                    onlineUsers.TryRemove(userName, out _);
+            }
         }
 
         await Clients.All.SendAsync("OnlineUsers", await GetAllUsers());
@@ -57,109 +79,133 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
 
     public async Task LoadMessages(string recipientId, int pageNumber = 1)
     {
-        int pageSize = 10;
-        var username = Context.User!.Identity!.Name;
-        var currentUser = await userManager.FindByNameAsync(username!);
+        const int pageSize = 10;
+        var userName = Context.User!.Identity!.Name!;
+        var currentUser = await userManager.FindByNameAsync(userName);
+        if (currentUser is null) return;
 
-        if (currentUser is null)
-        {
-            return;
-        }
-        List<MessageResponseDto> messages = await context.Messages
-        .Where(x => x.ReceiverId == currentUser!.Id && x.SenderId ==
-        recipientId || x.SenderId == currentUser!.Id && x.ReceiverId == recipientId)
-        .OrderByDescending(x => x.CreatedDate)
-        .Skip((pageNumber - 1) * pageSize)
-        .Take(pageSize)
-        .OrderBy(x => x.CreatedDate)
-        .Select(x => new MessageResponseDto
-        {
-            Id = x.Id,
-            Content = x.Content,
-            CreatedAt = x.CreatedDate,
-            ReceiverId = x.ReceiverId,
-            SenderId = x.SenderId
-        })
-        .ToListAsync();
-
-        foreach (var message in messages)
-        {
-            var msg = await context.Messages.FirstOrDefaultAsync(x => x.Id == message.Id);
-            if (msg != null && msg.ReceiverId == currentUser.Id)
+        Console.WriteLine($"Usuário logado: {currentUser.Id}");
+        Console.WriteLine($"Recipiente: {recipientId}");
+        
+        var messages = await context.Messages
+            .Where(x => (x.SenderId == currentUser.Id && x.ReceiverId == recipientId) ||
+                        (x.SenderId == recipientId && x.ReceiverId == currentUser.Id))
+            .OrderByDescending(x => x.CreatedDate)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .OrderBy(x => x.CreatedDate)
+            .Select(x => new MessageResponseDto
             {
-                msg.IsRead = true;
-                await context.SaveChangesAsync();
-            }
+                Id = x.Id,
+                Content = x.Content,
+                CreatedAt = x.CreatedDate,
+                ReceiverId = x.ReceiverId,
+                SenderId = x.SenderId
+            })
+            .ToListAsync();
 
-            await Clients.User(currentUser.Id)
-            .SendAsync("ReceiveMessageList", messages);
-        }
-    }
-    public async Task SendMessage(MessageRequestDto message)
-    {
-        var senderId = Context.User!.Identity!.Name;
-        var recipientId = message.ReceiverId;
-
-
-        var newMsg = new Message
+        foreach (var msg in messages)
         {
-            Sender = await userManager.FindByNameAsync(senderId!),
-            Receiver = await userManager.FindByIdAsync(recipientId!),
-            IsRead = false,
-            CreatedDate = DateTime.UtcNow,
-            Content = message.Content
-        };
+            var m = await context.Messages.FindAsync(msg.Id);
+            if (m != null && m.ReceiverId == currentUser.Id && !m.IsRead)
+            {
+                m.IsRead = true;
+            }
+        }
 
-        context.Messages.Add(newMsg);
         await context.SaveChangesAsync();
 
-        await Clients.User(recipientId!).SendAsync("ReceiveNewMessage", newMsg);
+        
+        await Clients.Caller.SendAsync("ReceiveMessageList", messages);
     }
 
+    public async Task SendMessage(MessageRequestDto message)
+    {
+        var senderUserName = Context.User!.Identity!.Name!;
+        var sender = await userManager.FindByNameAsync(senderUserName);
+        var receiver = await userManager.FindByIdAsync(message.ReceiverId!);
+
+        var newMessage = new Message
+        {
+            Sender = sender,
+            Receiver = receiver,
+            Content = message.Content,
+            CreatedDate = DateTime.UtcNow,
+            IsRead = false
+        };
+
+        context.Messages.Add(newMessage);
+        await context.SaveChangesAsync();
+
+        var receiverConnections = GetUserConnections(receiver.UserName!);
+        foreach (var connId in receiverConnections)
+        {
+            await Clients.Client(connId).SendAsync("ReceiveNewMessage", newMessage);
+        }
+    }
 
     public async Task NotifyTyping(string recipientUserName)
     {
-        var senderUserName = Context.User!.Identity!.Name;
-
-        if (senderUserName is null)
+        var recipientConnections = GetUserConnections(recipientUserName);
+        foreach (var conn in recipientConnections)
         {
-            return;
-        }
-
-        var connectionId = onlineUsers.Values.FirstOrDefault(x =>
-        x.UserName == recipientUserName)?.ConnectionId;
-
-        if (connectionId != null)
-        {
-            await Clients.Client(connectionId).SendAsync("NotifyTypingToUser");
+            await Clients.Client(conn).SendAsync("NotifyTypingToUser");
         }
     }
-
-    public override async Task OnDisconnectedAsync(Exception? exception)
-    {
-        var username = Context.User!.Identity!.Name;
-        onlineUsers.TryRemove(username!, out _);
-        await Clients.All.SendAsync("OnlineUsers", await GetAllUsers());
-    }
+/*
     private async Task<IEnumerable<OnlineUserDto>> GetAllUsers()
     {
-        var username = Context.User!.GetUserName();
+        var currentUserName = Context.User!.GetUserName();
+        var onlineSet = onlineUsers.Keys.ToHashSet();
 
-        var onlineUserSet = new HashSet<string>(onlineUsers.Keys);
-
-        var users = await userManager.Users.Select(u => new OnlineUserDto
-        {
-            Id = u.Id,
-            UserName = u.UserName,
-            FullName = u.FullName,
-            ProfilePicture = u.ProfilePicture,
-            IsOnline = onlineUserSet.Contains(u.UserName!),
-            UnreadCount = context.Messages.Count(x => x.ReceiverId == username &&
-            x.SenderId == u.Id && !x.IsRead)
-        })
-        .OrderByDescending(u => u.IsOnline)
-        .ToListAsync();
+        var users = await userManager.Users
+            .Select(u => new OnlineUserDto
+            {
+                Id = u.Id,
+                UserName = u.UserName,
+                FullName = u.FullName,
+                ProfilePicture = u.ProfilePicture,
+                IsOnline = onlineSet.Contains(u.UserName!),
+                UnreadCount = context.Messages
+                    .Count(m => m.ReceiverId == currentUserName && m.SenderId == u.Id && !m.IsRead)
+            })
+            .OrderByDescending(u => u.IsOnline)
+            .ToListAsync();
 
         return users;
+    }
+*/
+    private async Task<IEnumerable<OnlineUserDto>> GetAllUsers()
+    {
+        
+           var allConnectedUserNames = onlineUsers.Keys.ToList();
+
+            // Busca do banco e traz para a memória
+            var usersInDb = await userManager.Users
+                .Where(u => allConnectedUserNames.Contains(u.UserName!))
+                .ToListAsync();
+
+            // Agora podemos usar ?. normalmente
+            var users = usersInDb.Select(u => new OnlineUserDto
+            {
+                Id = u.Id,
+                UserName = u.UserName,
+                FullName = u.FullName,
+                ProfilePicture = u.ProfilePicture,
+                IsOnline = true,
+                ConnectionId = onlineUsers[u.UserName!].FirstOrDefault()?.ConnectionId
+            });
+
+            return users;
+
+    }
+
+    private List<string> GetUserConnections(string userName)
+    {
+        if (onlineUsers.TryGetValue(userName, out var connections))
+        {
+            return connections.Select(c => c.ConnectionId).ToList();
+        }
+        return new();
     }
 }
