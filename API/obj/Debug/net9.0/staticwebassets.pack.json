@@ -1,12 +1,24 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\072bc797-d7da-4483-a044-85e94b7aa2e0.png",
+      "PackagePath": "staticwebassets\\uploads\\072bc797-d7da-4483-a044-85e94b7aa2e0.png"
+    },
+    {
       "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\0ecf2325-10ac-4681-9b2a-d0310a21e2a3.jpg",
       "PackagePath": "staticwebassets\\uploads\\0ecf2325-10ac-4681-9b2a-d0310a21e2a3.jpg"
     },
     {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\13085aaa-06ba-41e4-a17f-f53c319f2914.PNG",
+      "PackagePath": "staticwebassets\\uploads\\13085aaa-06ba-41e4-a17f-f53c319f2914.PNG"
+    },
+    {
       "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\3ab91b8e-cd40-41f0-b3df-51bc734380f3.jpg",
       "PackagePath": "staticwebassets\\uploads\\3ab91b8e-cd40-41f0-b3df-51bc734380f3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\45c549a1-2bfb-4562-aff0-b032f05ec466.PNG",
+      "PackagePath": "staticwebassets\\uploads\\45c549a1-2bfb-4562-aff0-b032f05ec466.PNG"
     },
     {
       "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\58100e94-f025-41fe-8809-67c2c4c3bd55.jpg",
@@ -15,6 +27,14 @@
     {
       "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\69e67cef-3520-45d1-96f9-2b83d076f0dd.jpeg",
       "PackagePath": "staticwebassets\\uploads\\69e67cef-3520-45d1-96f9-2b83d076f0dd.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\6bfdc548-473d-4c13-966e-3dd0c40e772b.png",
+      "PackagePath": "staticwebassets\\uploads\\6bfdc548-473d-4c13-966e-3dd0c40e772b.png"
+    },
+    {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\6cf5c029-7574-4d7c-aad5-14b478e4214a.png",
+      "PackagePath": "staticwebassets\\uploads\\6cf5c029-7574-4d7c-aad5-14b478e4214a.png"
     },
     {
       "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\7888150c-482a-4eed-b273-4728069fd019.jpg",
@@ -45,8 +65,24 @@
       "PackagePath": "staticwebassets\\uploads\\bf33b0e7-c080-45f4-81b6-0b806b70ec54.jpg"
     },
     {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\d13b2087-51ba-4798-b708-73f20a5b1402.PNG",
+      "PackagePath": "staticwebassets\\uploads\\d13b2087-51ba-4798-b708-73f20a5b1402.PNG"
+    },
+    {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\df79daf8-0896-400d-9594-7a9151c8f4d6.png",
+      "PackagePath": "staticwebassets\\uploads\\df79daf8-0896-400d-9594-7a9151c8f4d6.png"
+    },
+    {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\e94208fa-a051-4ddf-8b6e-4e0e54f82e5e.png",
+      "PackagePath": "staticwebassets\\uploads\\e94208fa-a051-4ddf-8b6e-4e0e54f82e5e.png"
+    },
+    {
       "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\ec2bac32-c690-4713-8142-bd22cfd88f78.jpg",
       "PackagePath": "staticwebassets\\uploads\\ec2bac32-c690-4713-8142-bd22cfd88f78.jpg"
+    },
+    {
+      "Id": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\wwwroot\\uploads\\fda914fd-e043-4171-94b7-2622c969932a.PNG",
+      "PackagePath": "staticwebassets\\uploads\\fda914fd-e043-4171-94b7-2622c969932a.PNG"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

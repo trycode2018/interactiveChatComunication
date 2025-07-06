@@ -144,6 +144,10 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
         }
     }
 
+
+
+
+
     public async Task NotifyTyping(string recipientUserName)
     {
         var recipientConnections = GetUserConnections(recipientUserName);
@@ -151,8 +155,9 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
         {
             await Clients.Client(conn).SendAsync("NotifyTypingToUser");
         }
-    }
-/*
+    }   
+
+    /*
     private async Task<IEnumerable<OnlineUserDto>> GetAllUsers()
     {
         var currentUserName = Context.User!.GetUserName();
@@ -174,29 +179,30 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext context) : H
 
         return users;
     }
-*/
+    */
+
     private async Task<IEnumerable<OnlineUserDto>> GetAllUsers()
     {
-        
-           var allConnectedUserNames = onlineUsers.Keys.ToList();
 
-            // Busca do banco e traz para a memória
-            var usersInDb = await userManager.Users
-                .Where(u => allConnectedUserNames.Contains(u.UserName!))
-                .ToListAsync();
+        var allConnectedUserNames = onlineUsers.Keys.ToList();
 
-            // Agora podemos usar ?. normalmente
-            var users = usersInDb.Select(u => new OnlineUserDto
-            {
-                Id = u.Id,
-                UserName = u.UserName,
-                FullName = u.FullName,
-                ProfilePicture = u.ProfilePicture,
-                IsOnline = true,
-                ConnectionId = onlineUsers[u.UserName!].FirstOrDefault()?.ConnectionId
-            });
+        // Busca do banco e traz para a memória
+        var usersInDb = await userManager.Users
+            .Where(u => allConnectedUserNames.Contains(u.UserName!))
+            .ToListAsync();
 
-            return users;
+        // Agora podemos usar ?. normalmente
+        var users = usersInDb.Select(u => new OnlineUserDto
+        {
+            Id = u.Id,
+            UserName = u.UserName,
+            FullName = u.FullName,
+            ProfilePicture = u.ProfilePicture,
+            IsOnline = true,
+            ConnectionId = onlineUsers[u.UserName!].FirstOrDefault()?.ConnectionId
+        });
+
+        return users;
 
     }
 
