@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uWCiQNh5XoM=",
+  "dgSpecHash": "NIgUCrk373s=",
   "success": true,
-  "projectFilePath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\API.csproj",
+  "projectFilePath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\henri\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\henri\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",
@@ -101,8 +101,11 @@
     {
       "code": "NU1900",
       "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj",
       "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
+      "filePath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj",
+      "targetGraphs": []
     }
   ]
 }

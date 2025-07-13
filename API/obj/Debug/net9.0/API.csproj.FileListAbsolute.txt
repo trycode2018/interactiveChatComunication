@@ -19,12 +19,6 @@ C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\scopedcss\bundle\API
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets\msbuild.build.API.props
-C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.API.props
-C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.API.props
-C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\API.csproj.Up2Date
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\API.dll
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\refint\API.dll
@@ -156,3 +150,8 @@ C:\Users\henri\Desktop\InteractiveChat\API\bin\Debug\net9.0\Newtonsoft.Json.dll
 C:\Users\henri\Desktop\InteractiveChat\API\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
 C:\Users\henri\Desktop\InteractiveChat\API\obj\Debug\net9.0\API.sourcelink.json
 C:\Users\henri\Desktop\InteractiveChat\API\bin\Debug\net9.0\API.staticwebassets.runtime.json
+C:\Users\henri\Desktop\InteractiveChat\api\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\henri\Desktop\InteractiveChat\api\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\Users\henri\Desktop\InteractiveChat\api\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\Users\henri\Desktop\InteractiveChat\api\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\henri\Desktop\InteractiveChat\api\obj\Debug\net9.0\staticwebassets.build.json.cache

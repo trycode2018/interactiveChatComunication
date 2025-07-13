@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\API.csproj": {}
+    "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\API.csproj": {
+    "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\API.csproj",
+        "projectUniqueName": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\API.csproj",
+        "projectPath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\API.csproj",
         "packagesPath": "C:\\Users\\henri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\api\\obj\\",
+        "outputPath": "C:\\Users\\henri\\Desktop\\InteractiveChat\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -99,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
